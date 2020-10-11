@@ -2,7 +2,7 @@ exports.run = (client, message, args) => {
     const command = args[0]
 
     if (!client.commands.has(command)) {
-        return message.reply("That's not a command.")
+        return message.channel.send("That's not a command.")
     }
     
     delete require.cache[require.resolve(`./${command}.js`)];

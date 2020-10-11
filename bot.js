@@ -5,6 +5,8 @@ const config = require("./config.json");
 const prefix = config.prefix
 const fs = require("fs")
 const Enmap = require("enmap")
+const r2 = require('r2')
+
 client.config = config;
 
 fs.readdir("./events/", (err, files) => {
@@ -28,5 +30,6 @@ fs.readdir("./commands/", (err, files) => {
         client.commands.set(commandName, props);
     });
 });
+
 
 client.login(config.token);
