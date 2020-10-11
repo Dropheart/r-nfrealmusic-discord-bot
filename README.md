@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-"# r-nfrealmusic-discord-bot" 
-=======
-# r-nfrealmusic-discord-bot
->>>>>>> 921622ce2d0773468088c12f1258fa8d24c08d89
+# r/NFRealMusic Discord Bot
+the r/nfrealmusic discord, at the time of writing, has 7 public bots. i aim to change this.
+will i succeed? i dunno.
+will i try? hell yeah.
