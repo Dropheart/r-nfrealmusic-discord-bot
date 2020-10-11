@@ -5,7 +5,6 @@ const config = require("./config.json");
 const prefix = config.prefix
 const fs = require("fs")
 const Enmap = require("enmap")
-const r2 = require('r2')
 
 client.config = config;
 
