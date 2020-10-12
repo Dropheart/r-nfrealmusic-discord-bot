@@ -18,7 +18,7 @@ exports.run = (client, message, args) => {
         }
     } catch {
         message.channel.send("Ensure your message is in the format `song name - artist` with the dash in the middle.")
-        failed = 1
+        var failed = 1
     }
 
 
