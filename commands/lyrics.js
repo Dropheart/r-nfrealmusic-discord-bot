@@ -24,7 +24,7 @@ exports.run = (client, message, args) => {
 
     getLyrics(options).then((lyrics) => {
         if (failed) return
-        const split = lyrics.match(/[\s\S]{1,2000}\n/g) || [];
+        const split = lyrics.match(/[\s\S]{1,1500}\n/g) || [];
         let page = 0 
         const pages = split.length
 
