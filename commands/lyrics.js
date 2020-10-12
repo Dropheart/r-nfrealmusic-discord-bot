@@ -10,18 +10,17 @@ exports.run = (client, message, args) => {
     try {
         title = song[0].trim()
         artist = song[1].trim()
+        var options = {
+            apiKey: client.config.genius,
+            title: title,
+            artist: artist,
+            optimizeQuery: true
+        }
     } catch {
         message.channel.send("Ensure your message is in the format `song name - artist` with the dash in the middle.")
         failed = 1
     }
 
-
-    const options = {
-        apiKey: client.config.genius,
-        title: title,
-        artist: artist,
-        optimizeQuery: true
-    }
 
     getLyrics(options).then((lyrics) => {
         if (failed) return
