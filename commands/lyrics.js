@@ -24,9 +24,17 @@ exports.run = (client, message, args) => {
 
     getLyrics(options).then((lyrics) => {
         if (failed) return
-        const split = lyrics.match(/[\s\S]{1,1500}\n/g) || [];
+        try { 
+            var split = lyrics.match(/[\s\S]{1,1500}\n/g) || [];
+            var pages = split.length
+            console.log(split)
+        } catch {
+            message.channel.send("No lyrics were found. If applicable, try searching without brackets.")
+            var failed = 1
+        } 
         let page = 0 
-        const pages = split.length
+
+        if (failed) return
 
         genius.searchSong(options).then((moosic) => {
             const embed = new Discord.MessageEmbed()
