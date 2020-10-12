@@ -3,18 +3,19 @@
     "description": "a bot for the r/nfrealmusic discord",
     "version": "0.1.0",
     "maintainers": [
-      {
-        "name": "Ahmed",
-        "email": "ahmed@techfromtheheart.com",
-        "web": "https://techfromtheheart.com"
-      }
+        {
+            "name": "Ahmed",
+            "email": "ahmed@techfromtheheart.com",
+            "web": "https://techfromtheheart.com"
+        }
     ],
     "homepage": "discord.gg/yzqma4y",
-    
     "dependencies": {
-        "enmap": "latest",
-        "urllib": "latest",
         "discord.js": "latest",
-        "fs": "latest"
+        "enmap": "latest",
+        "fs": "latest",
+        "genius-lyrics-api": "^3.0.3",
+        "urllib": "latest",
+        "genius-lyricsc-api": "latest"
     }
 }
