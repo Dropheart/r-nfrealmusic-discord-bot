@@ -15,7 +15,6 @@
         "enmap": "latest",
         "fs": "latest",
         "genius-lyrics-api": "^3.0.3",
-        "urllib": "latest",
-        "genius-lyricsc-api": "latest"
+        "urllib": "latest"
     }
 }
