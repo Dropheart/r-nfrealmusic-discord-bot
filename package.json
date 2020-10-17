@@ -15,6 +15,7 @@
         "enmap": "latest",
         "fs": "latest",
         "genius-lyrics-api": "^3.0.3",
+        "mariadb": "^2.5.0",
         "urllib": "latest"
     }
 }
