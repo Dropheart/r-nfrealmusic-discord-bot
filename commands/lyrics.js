@@ -5,7 +5,8 @@ const Discord = require('discord.js')
 exports.run = (client, message, args) => {
     req = args.join(' ')
     song = req.split('-')
-    
+    message.channel.startTyping()
+
     console.log(song)
     try {
         title = song[0].trim()
@@ -49,7 +50,8 @@ exports.run = (client, message, args) => {
             console.log(split)
             console.log(moosic[0])
             console.log(pages)
-
+            
+            message.channel.stopTyping()
             message.channel.send(embed).then(message => {
                 if (split.length <= 1) return;
                 message.react('➡')

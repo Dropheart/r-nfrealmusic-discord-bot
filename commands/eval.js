@@ -6,7 +6,7 @@ exports.run = (client, message, args) => {
     try {
         evald = eval(code)
         message.channel.send(evald, {code:"xl"}); 
-    } catch {
-        message.channel.send("dude your code sucks")
+    } catch(err) {
+        message.channel.send("```" + err.message + "```")
     }
 }
