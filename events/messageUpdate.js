@@ -3,10 +3,10 @@ const fs = require('fs')
 const { client } = require('../bot.js')
 
 module.exports = (message, oldMessage, newMessage) => {
-    
+    if (!fs.exists(`./servers/${oldMessage.guild.id}.yml`)) return;
     try { var fsread = fs.readFileSync(`./servers/${oldMessage.guild.id}.yml`, 'utf8')
-    if (!serverconf.logchannels.messagelogs[0]) return;
     var serverconf = yml.parseDocument(fsread).toJSON()
+    if (!serverconf.logchannels.messagelogs[0]) return;
     var logchannel = serverconf.logchannels.messagelogs[0]
     console.log(client.channels.fetch(logchannel))
     var d = new Date()
