@@ -1,15 +1,21 @@
 const yml = require('yaml')
 const fs = require('fs')
+const { client } = require('../bot.js')
 
-module.exports = (oldMessage, newMessage) => {
+module.exports = (message, oldMessage, newMessage) => {
     
-    try { var fsread = fs.readFileSync(`./servers/${newMessage.guild.id}.yml`, 'utf8')
-    console.log(fsread)
-    var serverconf = yml.parseDocument(fsread)
-    console.log(serverconf)
-    var logchannel = serverconf.messagelogs
-
-    newMessage.logchannel.send(oldMessage + "has been changed to" + newMessage) } catch (err) {
+    try { var fsread = fs.readFileSync(`./servers/${oldMessage.guild.id}.yml`, 'utf8')
+    if (!serverconf.logchannels.messagelogs[0]) return;
+    var serverconf = yml.parseDocument(fsread).toJSON()
+    var logchannel = serverconf.logchannels.messagelogs[0]
+    console.log(client.channels.fetch(logchannel))
+    var d = new Date()
+    client.channels.fetch(logchannel).then(
+    console.log(client.channels.cache.get(logchannel),
+    client.channels.cache.get(channel).send(
+        `✏ **${oldMessage.author.username}#${oldMessage.author.discriminator}** (${oldMessage.author.id} / <@${oldMessage.author.id}>) edited their message at **${d}** in <#${oldMessage.channel.id}> (**${oldMessage.channel.name}**, ${oldMessage.channel.id}) \n \`\`\`${oldMessage.content}\`\`\` \`to\` \`\`\`${newMessage.content}\`\`\` \n `
+    )))
+    } catch (err) {
         console.log(err)
     }
 }

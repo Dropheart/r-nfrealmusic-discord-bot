@@ -1,6 +1,7 @@
 // setup
 const Discord = require("discord.js");
 const client = new Discord.Client({ ws: { intents: Discord.Intents.ALL }});
+exports.client = client
 const config = require("./config.json");
 const prefix = config.prefix
 const fs = require("fs")
