@@ -2,11 +2,13 @@ const yml = require('yaml')
 const fs = require('fs')
 const { client } = require('../bot.js')
 
-module.exports = (message, oldMessage, newMessage) => {
+module.exports = (oldMessage, newMessage) => {
+    // see if config exists, if not, exit
     if (!fs.existsSync(`./servers/${oldMessage.guild.id}.yml`)) return;
     try { var fsread = fs.readFileSync(`./servers/${oldMessage.guild.id}.yml`, 'utf8')
     var serverconf = yml.parseDocument(fsread).toJSON()
     if (!serverconf.logchannels.messagelogs[0]) return;
+    // see if a messageLog has been configured. this will also check for a general log channel, in the future
     var logchannel = serverconf.logchannels.messagelogs[0]
     console.log(client.channels.fetch(logchannel))
     var d = new Date()
