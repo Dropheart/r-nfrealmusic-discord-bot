@@ -1,8 +1,7 @@
 const yml = require('yaml')
 const fs = require('fs')
-const { client } = require('../bot.js')
 
-module.exports = (message, oldMessage, newMessage) => {
+module.exports = (client, oldMessage, newMessage) => {
     // see if config exists, if not, exit
     if (!fs.existsSync(`./servers/${oldMessage.guild.id}.yml`)) return;
     try { var fsread = fs.readFileSync(`./servers/${oldMessage.guild.id}.yml`, 'utf8')
@@ -15,7 +14,7 @@ module.exports = (message, oldMessage, newMessage) => {
         client.channels.fetch(logchannel).then(
         console.log(client.channels.cache.get(logchannel),
         client.channels.cache.get(logchannel).send(
-        `✏ **${oldMessage.author.username}#${oldMessage.author.discriminator}** (${oldMessage.author.id} / <@${oldMessage.author.id}>) edited their message at **${d}** in <#${oldMessage.channel.id}> (**${oldMessage.channel.name}**, ${oldMessage.channel.id}) \n \`\`\`${oldMessage.content}\`\`\` \`to\` \`\`\`${newMessage.content}\`\`\` \n `, {"allowedMentions": { "users" : []}}
+        `✏ **${oldMessage.author.username}#${oldMessage.author.discriminator}** (${oldMessage.author.id} / <@${oldMessage.author.id}>) edited their message at **${d}** in <#${oldMessage.channel.id}> (**${oldMessage.channel.name}**, ${oldMessage.channel.id}) \`\`\`${oldMessage.content}\`\`\` to \`\`\`${newMessage.content}\`\`\` \n `, {"allowedMentions": { "users" : []}}
     )))
     } catch (err) {
         console.log(err)
