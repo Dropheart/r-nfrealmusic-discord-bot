@@ -12,7 +12,7 @@ module.exports = (message, oldMessage, newMessage) => {
     var d = new Date()
     client.channels.fetch(logchannel).then(
     console.log(client.channels.cache.get(logchannel),
-    client.channels.cache.get(channel).send(
+    client.channels.cache.get(logchannel).send(
         `✏ **${oldMessage.author.username}#${oldMessage.author.discriminator}** (${oldMessage.author.id} / <@${oldMessage.author.id}>) edited their message at **${d}** in <#${oldMessage.channel.id}> (**${oldMessage.channel.name}**, ${oldMessage.channel.id}) \n \`\`\`${oldMessage.content}\`\`\` \`to\` \`\`\`${newMessage.content}\`\`\` \n `
     )))
     } catch (err) {
