@@ -13,7 +13,7 @@ module.exports = (client, message) => {
         client.channels.fetch(logchannel).then(
             console.log(client.channels.cache.get(logchannel),
             client.channels.cache.get(logchannel).send(
-            `✏ **${message.author.username}#${message.author.discriminator}** (${message.author.id} / <@${message.author.id}>)  their message at **${d}** in <#${message.channel.id}> (**${message.channel.name}**, ${message.channel.id}) \n \`\`\`${message.content}\`\`\` `, {"allowedMentions": { "users" : []}}
+            `🗑 **${message.author.username}#${message.author.discriminator}** (${message.author.id} / <@${message.author.id}>) deleted their message at **${d}** in <#${message.channel.id}> (**${message.channel.name}**, ${message.channel.id}) \`\`\`${message.content}\`\`\` `, {"allowedMentions": { "users" : []}}
         )))
     } catch (err) {
         console.log(err)
