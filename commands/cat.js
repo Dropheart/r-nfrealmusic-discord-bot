@@ -6,7 +6,8 @@ exports.run = (client, message, args) => {
         if(err) {
             message.channel.send(err);
         }
-        const cat = JSON.parse(cat)
+        const information = data.toString()
+        const cat = JSON.parse(information)
         message.channel.send(cat[0].url)
         
     }
