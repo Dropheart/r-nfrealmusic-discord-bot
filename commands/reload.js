@@ -1,7 +1,9 @@
 exports.run = (client, message, args) => {
     const command = args[0]
-
-    if (!client.commands.has(command)) {
+    if (message.author.id !== client.config.ownerid) return;
+    if (!args[0]) {
+        return message.channel.send("Maybe give me an argument, numpty.")
+    } else if (!client.commands.has(command)) {
         return message.channel.send("That's not a command.")
     }
     
