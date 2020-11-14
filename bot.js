@@ -31,3 +31,4 @@ fs.readdir("./commands/", (err, files) => {
 
 
 client.login(config.token);
+require('./functions/timercheck')(client)
