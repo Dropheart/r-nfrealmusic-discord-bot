@@ -2,3 +2,4 @@ config.json
 node_modules
 servers/*
 timers/*
+NF Bot.code-workspace
