@@ -4,8 +4,15 @@ const fs = require('fs')
 
 
 exports.run = (client, message, args) => {
-    var permission = permcheck(client, message, 'mute')
+    var permission = permcheck(client, message, message.member, 'mute')
     if (!permission) return;
+
+    var uid = args[0]
+    args = args.splice(1)
+    if (permcheck(client, message, message.guild.member(uid)) >= permcheck(client, message, message.member)) {
+        message.channel.send("🚫 You do not have permission to mute that user.")
+        return;
+    }
 
     try { var fsread = fs.readFileSync(`./servers/${message.guild.id}.yml`, 'utf8')
     var serverconf = yml.parseDocument(fsread).toJSON()
@@ -15,8 +22,6 @@ exports.run = (client, message, args) => {
     }
 
     try {
-        var uid = args[0]
-        args = args.splice(1)
         if (args[0].match(/^(\d).*([smhdy])$/g)) {
             var time = args[0]
             args = args.splice(1)  
