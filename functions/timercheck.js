@@ -15,7 +15,6 @@ module.exports = (client) => {
                     var serverconf = yml.parseDocument(fsread2).toJSON()
                     var muterole = serverconf.muteRole
                 } catch (err) {
-                    console.log('oops')
                 }
 
                 parsed = yml.parseDocument(fsread).toJSON()
