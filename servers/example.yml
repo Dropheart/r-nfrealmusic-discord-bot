@@ -1,0 +1,16 @@
+---
+logchannels:
+  messagelogs: 
+    - 'channelid'
+  modlogs:
+    - 'channelid'
+
+rolePermissions:
+  'roleid': XXX #number 
+
+commandPermissions:
+  'mute': XXX #number
+
+muteRole:
+  'roleid'
+...
