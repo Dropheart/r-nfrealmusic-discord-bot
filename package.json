@@ -16,7 +16,7 @@
         "fs": "latest",
         "genius-lyrics-api": "^3.0.3",
         "js-yaml": "^3.14.0",
-        "mariadb": "^2.5.0",
+        "mariadb": "^2.5.2",
         "urllib": "latest",
         "yaml": "^1.10.0"
     }
