@@ -3,7 +3,6 @@ const fs = require('fs')
 
 
 module.exports = (client, message, user, command) => {
-    
     if (message.channel && message.channel.type == "dm") return;
     if (!fs.existsSync(`./servers/${message.guild.id}.yml`)) return;
     try { var fsread = fs.readFileSync(`./servers/${message.guild.id}.yml`, 'utf8')
