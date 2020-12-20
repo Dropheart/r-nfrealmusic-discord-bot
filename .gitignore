@@ -3,3 +3,4 @@ node_modules
 servers/*
 timers/*
 NF Bot.code-workspace
+!servers/example.yml
