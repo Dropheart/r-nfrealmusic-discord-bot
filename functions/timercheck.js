@@ -1,8 +1,6 @@
 const yml = require('yaml')
 const fs = require('fs')
 
-
-
 module.exports = (client) => {
 
     var check = setInterval(timer, 1000)
@@ -23,7 +21,6 @@ module.exports = (client) => {
                 try {
                     for (var [key, value] of Object.entries(parsed)) {
                         value = parseInt(value)
-                        console.log(value)
                         if (mafs >= value) {
                             client.guilds.fetch(guildid).then(guild => guild.member(key).roles.remove(muterole, 'Mute time expired'))
                             let regex = new RegExp("'" + key + "': \\d{10,11}\\n", "g") 
