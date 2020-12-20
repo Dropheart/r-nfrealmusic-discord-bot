@@ -2,7 +2,7 @@ const permcheck= require('../functions/permissioncheck.js')
 const yml = require('yaml')
 const jsyml = require('js-yaml')
 const fs = require('fs')
-
+const modlog = require('../functions/modlog.js')
 
 exports.run = (client, message, args) => {
     var permission = permcheck(client, message, message.member, 'mute')
@@ -28,7 +28,7 @@ exports.run = (client, message, args) => {
             return;
         }
     } catch (err) {
-        message.channel.send("Please supply a user ID.")
+        message.channel.send("Ensure your message is formatted as such: `mute userid (time) (reason)")
         return;
     }
 
@@ -67,7 +67,9 @@ exports.run = (client, message, args) => {
         if (time) {
             mutereason = args.join(' ')
             member = message.guild.member(uid).user.tag 
+            logreason = `[Muted for ${time}] ` + mutereason 
             try {
+                modlog(client, message, 'Mute', uid, logreason)
                 message.guild.member(uid).roles.add(muterole, mutereason).then(message.channel.send(`User **${member}** has been muted for ${time}.`))    
             } catch (err) {
                 message.channel.send("🚫 I do not have permission to assign the mute role.")
@@ -82,6 +84,7 @@ exports.run = (client, message, args) => {
         member = message.guild.member(uid).user.tag 
         console.log(err)   
         try {
+            modlog(client, message, 'Mute', uid, mutereason)
             message.guild.member(uid).roles.add(muterole, mutereason).then(message.channel.send(`User **${member}** has been muted indefinitely.`))
         } catch (err) {
             message.channel.send("🚫 I do not have permission to assign the mute role.")
