@@ -14,4 +14,4 @@ if you'd like to self host this bot (y'know you can invite it, right?) then you'
 * update config_example.json and rename it to config.json
 * npm install for the required packages in package.json
 * ask yourself why you're doing this, and run node bot.js
-* add to server config- i'll provide an example tomorrow and update the readme
+* setup server config of guildid.yml like example.yml - this will eventually be doable via commands, but not right now
