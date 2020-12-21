@@ -10,6 +10,8 @@ rolePermissions:
 
 commandPermissions:
   'mute': XXX #number
+  'ban': XXX
+  'kick': XXX
 
 muteRole:
   'roleid'
