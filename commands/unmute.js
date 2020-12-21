@@ -1,9 +1,10 @@
 const permcheck= require('../functions/permissioncheck.js')
 const yml = require('yaml')
 const fs = require('fs')
+const modlog = require('../functions/modlog.js')
 
 
-exports.run = (client, message, args) => {
+exports.run = async (client, message, args) => {
     var permission = permcheck(client, message, message.member, 'mute')
     if (!permission) return;
 
@@ -18,6 +19,7 @@ exports.run = (client, message, args) => {
 
     try {
         var uid = args[0]
+        await message.guild.member(uid).fetch()
         if (!message.guild.member(uid).roles.cache.keyArray().includes(muterole)) {
             message.channel.send(`**${message.guild.member(uid).user.tag}** is already unmuted.`)
             return;
@@ -28,7 +30,11 @@ exports.run = (client, message, args) => {
             return;
         }
     } catch (err) {
-        message.channel.send("Please supply a user ID.")
+        if (err.message == 'Cannot read property \'fetch\' of null' && uid) {
+            message.channel.send(`❓ This user is not on this server. Double check your provided ID.`)
+        } else {
+            message.channel.send("Please supply a user ID.")
+        }
         return;
     }
 
@@ -39,8 +45,8 @@ exports.run = (client, message, args) => {
         let regex = new RegExp("'" + uid + "': \\d{10,11}\\n", "g") 
         let newData = fsread.replace(regex, '')
         fs.writeFileSync(`./timers/mutes/${message.guild.id}.yml`, newData, 'utf8')
-        
         message.guild.member(uid).roles.remove(muterole, mutereason).then(message.channel.send(`User **${member}** has been unmuted.`))
+        modlog(client, message, 'Unmute', uid, mutereason)
     } catch(err) {
         console.log(err)
         message.channel.send("Ensure your message is in the format `unmute userid (reason)`")
