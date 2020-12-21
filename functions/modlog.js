@@ -1,6 +1,5 @@
 const yml = require('yaml')
 const fs = require('fs')
-const jsyml = require('js-yaml')
 const { MessageEmbed } = require('discord.js')
 const sql = require('../mariadb.js')
 
@@ -13,7 +12,13 @@ module.exports = async (client, message, type, victim, reason) => {
         var d = new Date()
         let epoch = Math.floor(new Date().getTime() / 1000)
         if (type === 'Mute') {
-            color = 'D3D3D3'
+            color = '8B0000'
+        } else if (type === 'Ban') {
+            color = 'FF0000'
+        } else if (type === 'Unban' || 'Unmute') {
+            color = '00FF00'
+        } else if (type === 'Kick') {
+            color = 'FFA500'
         }
 
         let embed
@@ -32,10 +37,13 @@ module.exports = async (client, message, type, victim, reason) => {
             console.log(err)
         }
 
+        if (!reason) {reason = "No reason provided."}
+        
+        nerd = await client.users.fetch(victim)
         embed = new MessageEmbed()
         .setTitle(`${type} - Case #${caseid}`)
         .setColor(color)
-        .addField("Victim", `${message.guild.member(victim).user.tag}\n<@${message.guild.member(victim).user.id}>`, true)
+        .addField("Victim", `${nerd.tag}\n<@${nerd.id}>`, true)
         .addField("Moderator", `${message.member.user.tag}\n<@${message.member.user.id}>`, true)
         .addField(`${message.member.user.tag} @ ${d}`, reason, false)
 
