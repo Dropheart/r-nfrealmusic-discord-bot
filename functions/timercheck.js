@@ -1,5 +1,6 @@
 const yml = require('yaml')
 const fs = require('fs')
+const modlog = require('./modlog')
 
 module.exports = (client) => {
 
@@ -23,6 +24,7 @@ module.exports = (client) => {
                         value = parseInt(value)
                         if (mafs >= value) {
                             client.guilds.fetch(guildid).then(guild => guild.member(key).roles.remove(muterole, 'Mute time expired'))
+                            // modlog(client, message, 'Unmute', key, "[Automatic Event] Mute expired")
                             let regex = new RegExp("'" + key + "': \\d{10,11}\\n", "g") 
                             let newData = fsread.replace(regex, '')
                             fs.writeFileSync(`./timers/mutes/${file}`, newData, 'utf8')            
