@@ -92,7 +92,7 @@ exports.run = async (client, message, args) => {
 
         let lmg = `_No messages sent since last bot restart_`
         let nick = `_No nickname set_`
-        if (guildguy.lastMessageID) {
+        if (guildguy.lastMessage) {
             lmg = `${since(Math.floor(guildguy.lastMessage.createdTimestamp / 1000))} (\`${guildguy.lastMessage.createdAt}\`)`
         }
         if (guildguy.nickname) {
