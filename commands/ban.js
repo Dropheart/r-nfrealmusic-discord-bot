@@ -38,12 +38,18 @@ exports.run = async (client, message, args) => {
         }
     }
 
+    bannable = await message.guild.member(uid).bannable
+    if (!bannable) {
+        message.channel.send(`❌ I do not have permission to ban this member.`)
+        return;
+    }
+
     let reason = args.join(' ')
 
     try {
+        cid = await modlog(client, message, 'Ban', uid, reason)
         await message.guild.members.ban(uid, { days: days, reason: reason})
-        message.channel.send(`🔨 User **${myguy.tag}** has been banned.`)
-        modlog(client, message, 'Ban', uid, reason)
+        message.channel.send(`🔨 ${cid[0]}User **${myguy.tag}** has been banned. (Case ${cid[1]})`)
     } catch (err) {
         console.log(err)
         console.log(err.messaage)
