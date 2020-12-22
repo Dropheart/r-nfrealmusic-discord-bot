@@ -74,8 +74,9 @@ exports.run = async (client, message, args) => {
             member = message.guild.member(uid).user.tag 
             logreason = `[Muted for ${time}] ` + mutereason 
             try {
-                message.guild.member(uid).roles.add(muterole, mutereason).then(message.channel.send(`🤐 User **${member}** has been muted for ${time}.`))    
-                modlog(client, message, 'Mute', uid, logreason)
+                await message.guild.member(uid).roles.add(muterole, mutereason)   
+                cid = await modlog(client, message, 'Mute', uid, logreason)
+                message.channel.send(`🤐 ${cid[0]}User **${member}** has been muted for ${time}. (Case ${cid[1]})`)
             } catch (err) {
                 message.channel.send("🚫 I do not have permission to assign the mute role.")
             }
@@ -90,8 +91,8 @@ exports.run = async (client, message, args) => {
         console.log(err)   
         try {
             await message.guild.member(uid).roles.add(muterole, mutereason)
-            message.channel.send(`User **${member}** has been muted indefinitely.`)
-            modlog(client, message, 'Mute', uid, mutereason)
+            cid = await modlog(client, message, 'Mute', uid, mutereason)
+            message.channel.send(`🤐 ${cid[0]}User **${member}** has been muted indefinitely. (Case ${cid[1]})`)
         } catch (err) {
             message.channel.send("🚫 I do not have permission to assign the mute role.")
         }
