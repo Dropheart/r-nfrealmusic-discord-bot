@@ -23,12 +23,18 @@ exports.run = async (client, message, args) => {
         }    
     }
 
+    kickable = await message.guild.member(uid).kickable
+    if (!kickable) {
+        message.channel.send(`❌ I do not have permission to kick this member.`)
+        return;
+    }
+
     let reason = args.join(' ')
 
     try {
+        cid = await modlog(client, message, 'Kick', uid, reason)
         await message.guild.member(uid).kick(reason)
-        message.channel.send(`👢 User **${myguy.tag}** has been kicked.`)
-        modlog(client, message, 'Kick', uid, reason)
+        message.channel.send(`👢 ${cid[0]}User **${myguy.tag}** has been kicked. (Case ${cid[1]})`)
     } catch (err) {
         console.log(err)
         console.log(err.messaage)
