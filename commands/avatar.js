@@ -2,7 +2,7 @@ const { User } = require("discord.js")
 
 exports.run = (client, message, args) => {
     if (!args[0]) {
-        message.channel.send(message.author.displayAvatarURL())
+        message.channel.send(message.author.displayAvatarURL({dynamic: true, size: 1024}))
     } else {
         try {
             theirid = args[0]
@@ -17,7 +17,7 @@ exports.run = (client, message, args) => {
                 }
             }
             person = client.users.cache.get(theirid)
-            message.channel.send(person.displayAvatarURL())
+            message.channel.send(person.displayAvatarURL({dynamic: true, size: 1024}))
     } catch (err) {
         console.log(err)
         }
