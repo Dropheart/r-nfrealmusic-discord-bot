@@ -30,7 +30,10 @@ exports.run = async (client, message, args) => {
     }
 
     let reason = args.join(' ')
-
+    if (permcheck(client, message, message.guild.member(uid)) >= permcheck(client, message, message.member)) {
+        message.channel.send("🚫 You do not have permission to kick that user.")
+        return;
+    }
     try {
         cid = await modlog(client, message, 'Kick', uid, reason)
         await message.guild.member(uid).kick(reason)

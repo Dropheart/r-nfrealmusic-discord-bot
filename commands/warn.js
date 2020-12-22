@@ -22,7 +22,10 @@ exports.run = async (client, message, args) => {
             console.log(err.message)
         }    
     }
-
+    if (permcheck(client, message, message.guild.member(uid)) >= permcheck(client, message, message.member)) {
+        message.channel.send("🚫 You do not have permission to warn that user.")
+        return;
+    }
     let reason = args.join(' ')
 
     try {

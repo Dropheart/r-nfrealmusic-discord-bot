@@ -28,7 +28,10 @@ exports.run = async (client, message, args) => {
     }
 
     let reason = args.join(' ')
-
+    if (permcheck(client, message, message.guild.member(uid)) >= permcheck(client, message, message.member)) {
+        message.channel.send("🚫 You do not have permission to ban that user.")
+        return;
+    }
     
     try {
         await message.guild.members.unban(uid, reason)
