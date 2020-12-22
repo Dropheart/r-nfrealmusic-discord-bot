@@ -45,8 +45,9 @@ exports.run = async (client, message, args) => {
         let regex = new RegExp("'" + uid + "': \\d{10,11}\\n", "g") 
         let newData = fsread.replace(regex, '')
         fs.writeFileSync(`./timers/mutes/${message.guild.id}.yml`, newData, 'utf8')
-        message.guild.member(uid).roles.remove(muterole, mutereason).then(message.channel.send(`User **${member}** has been unmuted.`))
-        modlog(client, message, 'Unmute', uid, mutereason)
+        await message.guild.member(uid).roles.remove(muterole, mutereason)
+        cid = await modlog(client, message, 'Unmute', uid, mutereason)
+        message.channel.send(`${cid[0]}User **${member}** has been unmuted. (Case ${cid[1]})`)
     } catch(err) {
         console.log(err)
         message.channel.send("Ensure your message is in the format `unmute userid (reason)`")
