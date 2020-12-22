@@ -13,7 +13,7 @@ module.exports = (client, guild) => {
     
     async function f() {
         try {
-            res = await sql.query(`CREATE TABLE ${guild.id} (caseid INT NOT NULL, reason TEXT NULL DEFAULT NULL, victim VARCHAR NULL DEFAULT NULL, moderator VARCHAR NULL DEFAULT NULL, date INT NULL DEFAULT NULL, type TINYTEXT NULL DEFAULT NULL, link TINYTEXT NULL DEFAULT NULL);`)
+            res = await sql.query(`CREATE TABLE \`${guild.id}\` (caseid INT NOT NULL, reason TEXT NULL DEFAULT NULL, victim VARCHAR(19) NULL DEFAULT NULL, moderator VARCHAR(19) NULL DEFAULT NULL, date INT NULL DEFAULT NULL, type TINYTEXT NULL DEFAULT NULL, link TINYTEXT NULL DEFAULT NULL);`)
         } catch (err) {
             console.log(err)
         } 
