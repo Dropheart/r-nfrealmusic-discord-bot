@@ -21,15 +21,19 @@ exports.run = async (client, message, args) => {
         } else if (err.message == 'Unknown User') {
             message.channel.send(`❓ This user does not exist.`)
             return;
+        } else if (err.message == 'Missing Permissions') {
+            message.channel.send(`🚫 I do not have permission to unban users.`)
+            return;
         } else {console.log(err)}
     }
 
     let reason = args.join(' ')
 
+    
     try {
         await message.guild.members.unban(uid, reason)
-        message.channel.send(`✅ User ${myguy.tag} has been unbanned.`)
-        modlog(client, message, 'Unban', uid, reason)
+        cid = await modlog(client, message, 'Unban', uid, reason)
+        message.channel.send(`✅ ${cid[0]}User ${myguy.tag} has been unbanned. (Case ${cid[1]})`)
     } catch (err) {
         console.log(err)
         console.log(err.message)
