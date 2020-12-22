@@ -12,6 +12,9 @@ commandPermissions:
   'mute': XXX #number
   'ban': XXX
   'kick': XXX
+  'note': XXX
+  'case': XXX
+  'info': XXX
 
 muteRole:
   'roleid'
