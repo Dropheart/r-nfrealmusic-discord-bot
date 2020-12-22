@@ -9,16 +9,34 @@ module.exports = async (client, message, type, victim, reason) => {
         var serverconf = yml.parseDocument(fsread).toJSON()
         if (!serverconf.logchannels.modlogs[0]) return;
         var logchannel = serverconf.logchannels.modlogs[0]
-        var d = new Date()
         let epoch = Math.floor(new Date().getTime() / 1000)
+        var d = new Date()
+
+        let actioned
         if (type === 'Mute') {
             color = '8B0000'
+            actioned = 'muted in'
+            configured = serverconf.caseDMs.mute
         } else if (type === 'Ban') {
             color = 'FF0000'
-        } else if (type === 'Unban' || 'Unmute') {
+            actioned = 'banned from'
+            configured = serverconf.caseDMs.ban
+        } else if (type === 'Unmute') {
+            color = '00FF00'
+            actioned = 'unmuted in'
+            configured = serverconf.caseDMs.unmute
+        } else if (type === 'Unban') {
             color = '00FF00'
         } else if (type === 'Kick') {
             color = 'FFA500'
+            actioned = 'kicked from'
+            configured = serverconf.caseDMs.kick
+        } else if (type === 'Warn') {
+            color = '4A0D00'
+            actioned = 'warned in'
+            configured = serverconf.caseDMs.warn
+        } else if (type === 'Note') {
+            color = '00EAFF'
         }
 
         let embed
@@ -36,17 +54,40 @@ module.exports = async (client, message, type, victim, reason) => {
         } catch (err) {
             console.log(err)
         }
+        
+        if (reason.length > 1000) {
+            await message.channel.send('Reason too long.')
+            return;
+        }
 
         if (!reason) {reason = "No reason provided."}
-        
-        nerd = await client.users.fetch(victim)
+        let tbs
+        let cannot = ''
+        if (actioned) {
+            tbs = `**You have been ${actioned} ${message.guild.name}. The following information was given regarding it:**\n${configured}`
+            tbs = tbs.replace('{r}', reason)
+            try {
+                await myguy.send(tbs)
+            } catch (err) {
+                if (err.message != "Cannot send messages to this user") {
+                    console.log(err.message)
+                }
+                reason = `[Could not message user] ${reason}`
+                cannot = '[Could not message user] '
+
+            }
+        }
+
+
+        myguy = await client.users.fetch(victim)
         embed = new MessageEmbed()
         .setTitle(`${type} - Case #${caseid}`)
         .setColor(color)
-        .addField("Victim", `${nerd.tag}\n<@${nerd.id}>`, true)
+        .addField("Victim", `${myguy.tag}\n<@${myguy.id}>`, true)
         .addField("Moderator", `${message.member.user.tag}\n<@${message.member.user.id}>`, true)
-        .addField(`${message.member.user.tag} @ ${d}`, reason, false)
-
+        .addField(`Reason`, reason, false)
+        .addField(`Time`, d, false)
+        
         let msglink
         let mod = message.member.user.id
 
@@ -60,11 +101,10 @@ module.exports = async (client, message, type, victim, reason) => {
             console.log(err)
         }
 
+        return [cannot, caseid]
         
-
-
-
     } catch (err) {
         console.log(err)
+        console.log(err.message)
     }
 }
