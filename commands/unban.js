@@ -1,5 +1,6 @@
 const permcheck= require('../functions/permissioncheck.js')
-const modlog = require('../functions/modlog.js')
+const modlog = require('../functions/modlog.js');
+const getuid = require('../functions/getuid.js');
 
 
 exports.run = async (client, message, args) => {
@@ -7,8 +8,9 @@ exports.run = async (client, message, args) => {
     if (!permission) return;
 
     let myguy
+    let uid = getuid(message, args)
+
     try {
-        uid = args[0]
         myguy = await client.users.fetch(uid)
         args = args.splice(1)
         console.log(args)
@@ -28,10 +30,6 @@ exports.run = async (client, message, args) => {
     }
 
     let reason = args.join(' ')
-    if (permcheck(client, message, message.guild.member(uid)) >= permcheck(client, message, message.member)) {
-        message.channel.send("🚫 You do not have permission to ban that user.")
-        return;
-    }
     
     try {
         await message.guild.members.unban(uid, reason)

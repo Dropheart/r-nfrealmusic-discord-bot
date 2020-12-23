@@ -2,6 +2,7 @@ const permcheck= require('../functions/permissioncheck.js')
 const yml = require('yaml')
 const fs = require('fs')
 const modlog = require('../functions/modlog.js')
+const getuid = require('../functions/getuid.js')
 
 
 exports.run = async (client, message, args) => {
@@ -16,9 +17,10 @@ exports.run = async (client, message, args) => {
         message.channel.send("Configure a mute role.")
         return;
     }
+   
+    let uid = getuid(message, args)
 
     try {
-        var uid = args[0]
         await message.guild.member(uid).fetch()
         if (!message.guild.member(uid).roles.cache.keyArray().includes(muterole)) {
             message.channel.send(`**${message.guild.member(uid).user.tag}** is already unmuted.`)

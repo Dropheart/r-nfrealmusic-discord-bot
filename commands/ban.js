@@ -1,15 +1,15 @@
 const permcheck= require('../functions/permissioncheck.js')
-const modlog = require('../functions/modlog.js')
+const modlog = require('../functions/modlog.js');
+const getuid = require('../functions/getuid.js');
 
 
 exports.run = async (client, message, args) => {
     var permission = permcheck(client, message, message.member, 'ban')
     if (!permission) return;
 
-    let uid
+    let uid = getuid(message, args)
     let banned
     try {
-        uid = args[0]
         args = args.splice(1)
         console.log(args)
         myguy = await client.users.fetch(uid)
