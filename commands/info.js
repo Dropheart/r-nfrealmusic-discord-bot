@@ -1,13 +1,14 @@
 const permcheck= require('../functions/permissioncheck.js')
 const sql = require('../mariadb.js')
 const { MessageEmbed } = require('discord.js')
-
+const getuid = require('../functions/getuid.js')
 
 exports.run = async (client, message, args) => {
     var permission = permcheck(client, message, message.member, 'info')
     if (!permission) return;
 
-    let things = await sql.query(`SELECT caseid, reason, victim, moderator, date, type, link FROM \`${message.guild.id}\` WHERE victim=${args[0]}`)
+    let uid = getuid(message, args) 
+    let things = await sql.query(`SELECT caseid, reason, victim, moderator, date, type, link FROM \`${message.guild.id}\` WHERE victim=${uid}`)
     let guildguy
     
     things = things.splice(0).reverse()
@@ -35,13 +36,8 @@ exports.run = async (client, message, args) => {
         }
     }
 
-    let inServer = true
-    let myguy = await client.users.fetch(args[0])
-    try {
-        guildguy = await message.guild.member(args[0])
-    } catch (err) {
-        inServer = false
-    }
+    let myguy = await client.users.fetch(uid)
+    guildguy = await message.guild.member(uid)
 
     function since(x) {
         let seconds = Math.floor(new Date().getTime() / 1000) - x 
@@ -82,7 +78,7 @@ exports.run = async (client, message, args) => {
     Created: ${time} (\`${myguy.createdAt}\`)
     `)
 
-    if (inServer) {
+    if (guildguy) {
         
         let x = guildguy.roles.cache.keyArray()
         x = '<@&' + x.join('> <@&') + '>'
@@ -99,7 +95,7 @@ exports.run = async (client, message, args) => {
             nick = guildguy.nickname
         }
         embed.addField(`**Member Information**`,
-        `Nickname: ${nick}
+        `Nickname: **${nick}**
         Joined: ${joined} (\`${guildguy.joinedAt}\`)
         Roles: ${x}
         Last Message: ${lmg}
