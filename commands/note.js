@@ -15,7 +15,9 @@ exports.run = async (client, message, args) => {
     let reason = args.join(' ')
 
     try {
+        canirun(message, true, 'mod') 
         cid = await modlog(client, message, 'Note', uid, reason)
+        canirun(message, false, 'mod')
         message.channel.send(`‼ ${cid[0]}Added a note on **${myguy.tag}**. (Case ${cid[1]})`)
     } catch (err) {
         console.log(err)

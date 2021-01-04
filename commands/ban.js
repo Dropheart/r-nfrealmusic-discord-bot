@@ -50,8 +50,10 @@ exports.run = async (client, message, args) => {
         return;
     }
     try {
+        canirun(message, true, 'mod')
         cid = await modlog(client, message, 'Ban', uid, reason)
         await message.guild.members.ban(uid, { days: days, reason: reason})
+        canirun(message, false, 'mod')
         message.channel.send(`🔨 ${cid[0]}User **${myguy.tag}** has been banned. (Case ${cid[1]})`)
     } catch (err) {
         console.log(err)

@@ -1,7 +1,7 @@
 const permcheck= require('../functions/permissioncheck.js')
 const modlog = require('../functions/modlog.js');
 const getuid = require('../functions/getuid.js');
-
+const canirun = require('../functions/ratelimits.js')
 
 exports.run = async (client, message, args) => {
     var permission = permcheck(client, message, message.member, 'kick')
@@ -29,7 +29,9 @@ exports.run = async (client, message, args) => {
     let reason = args.join(' ')
 
     try {
+        canirun(message, true, 'mod') 
         cid = await modlog(client, message, 'Warn', uid, reason)
+        canirun(message, false, 'mod')
         message.channel.send(`‼ ${cid[0]}User **${myguy.tag}** has been warned. (Case ${cid[1]})`)
     } catch (err) {
         console.log(err)

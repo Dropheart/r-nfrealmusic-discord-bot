@@ -32,8 +32,10 @@ exports.run = async (client, message, args) => {
     let reason = args.join(' ')
     
     try {
+        canirun(message, true, 'mod') 
         await message.guild.members.unban(uid, reason)
         cid = await modlog(client, message, 'Unban', uid, reason)
+        canirun(message, false, 'mod')
         message.channel.send(`✅ ${cid[0]}User ${myguy.tag} has been unbanned. (Case ${cid[1]})`)
     } catch (err) {
         console.log(err)

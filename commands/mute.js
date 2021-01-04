@@ -39,6 +39,7 @@ exports.run = async (client, message, args) => {
     }
 
 
+    canirun(message, true, 'mod') 
 
     try {
         if (args[0].match(/^(\d).*([smhdy])$/g)) {
@@ -77,6 +78,7 @@ exports.run = async (client, message, args) => {
             try {
                 await message.guild.member(uid).roles.add(muterole, mutereason)   
                 cid = await modlog(client, message, 'Mute', uid, logreason)
+                canirun(message, false, 'mod')
                 message.channel.send(`🤐 ${cid[0]}User **${member}** has been muted for ${time}. (Case ${cid[1]})`)
             } catch (err) {
                 message.channel.send("🚫 I do not have permission to assign the mute role.")
@@ -93,6 +95,7 @@ exports.run = async (client, message, args) => {
         try {
             await message.guild.member(uid).roles.add(muterole, mutereason)
             cid = await modlog(client, message, 'Mute', uid, mutereason)
+            canirun(message, false, 'mod')
             message.channel.send(`🤐 ${cid[0]}User **${member}** has been muted indefinitely. (Case ${cid[1]})`)
         } catch (err) {
             message.channel.send("🚫 I do not have permission to assign the mute role.")
