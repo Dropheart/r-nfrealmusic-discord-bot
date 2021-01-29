@@ -42,7 +42,7 @@ exports.run = async (client, message, args) => {
     canirun(message, true, 'mod') 
 
     try {
-        if (args[0].match(/^(\d).*([smhdy])$/g)) {
+        if (args[0].match(/^(\d)*([smhdy]|(hr))$/g)) {
             var time = args[0]
             args = args.splice(1)  
             
