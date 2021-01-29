@@ -1,7 +1,7 @@
 const permcheck= require('../functions/permissioncheck.js')
 const modlog = require('../functions/modlog.js');
 const getuid = require('../functions/getuid.js');
-
+const canirun = require('../functions/ratelimits.js')
 
 exports.run = async (client, message, args) => {
     var permission = permcheck(client, message, message.member, 'note')
@@ -13,8 +13,6 @@ exports.run = async (client, message, args) => {
     myguy = await client.users.fetch(uid)
     
     let reason = args.join(' ')
-
-    
 
     try {
         canirun(message, true, 'mod') 
