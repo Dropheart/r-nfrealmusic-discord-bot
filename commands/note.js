@@ -14,6 +14,8 @@ exports.run = async (client, message, args) => {
     
     let reason = args.join(' ')
 
+    
+
     try {
         canirun(message, true, 'mod') 
         cid = await modlog(client, message, 'Note', uid, reason)

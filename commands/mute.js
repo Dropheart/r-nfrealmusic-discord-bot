@@ -4,6 +4,7 @@ const jsyml = require('js-yaml')
 const fs = require('fs')
 const modlog = require('../functions/modlog.js')
 const getuid = require('../functions/getuid.js')
+const canirun = require('../functions/ratelimits.js')
 
 exports.run = async (client, message, args) => {
     var permission = permcheck(client, message, message.member, 'mute')

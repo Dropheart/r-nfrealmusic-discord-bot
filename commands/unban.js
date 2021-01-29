@@ -1,6 +1,7 @@
 const permcheck= require('../functions/permissioncheck.js')
 const modlog = require('../functions/modlog.js');
 const getuid = require('../functions/getuid.js');
+const canirun = require('../functions/ratelimits.js')
 
 
 exports.run = async (client, message, args) => {
