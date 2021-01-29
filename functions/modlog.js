@@ -86,7 +86,7 @@ module.exports = async (client, message, type, victim, reason) => {
         .addField("Victim", `${myguy.tag}\n<@${myguy.id}>`, true)
         .addField("Moderator", `${message.member.user.tag}\n<@${message.member.user.id}>`, true)
         .addField(`Reason`, reason, false)
-        .addField(`Time`, d, false)
+        .setFooter(`Original case time: ${d}`)
         
         let msglink
         let mod = message.member.user.id
@@ -96,7 +96,7 @@ module.exports = async (client, message, type, victim, reason) => {
         msglink = message.url
 
         try {
-            await sql.query(`INSERT INTO \`${message.guild.id}\` VALUES (${caseid}, '${reason}', ${victim}, ${mod}, ${epoch}, '${type}', '${msglink}');`)
+            await sql.query(`INSERT INTO \`${message.guild.id}\` (caseid, reason, victim, moderator, date, type, link) VALUES (${caseid}, '${reason}', ${victim}, ${mod}, ${epoch}, '${type}', '${msglink}');`)
         } catch (err) {
             console.log(err)
         }
