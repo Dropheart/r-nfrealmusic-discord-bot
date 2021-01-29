@@ -1,16 +1,18 @@
 const permcheck= require('../functions/permissioncheck.js')
 const sql = require('../mariadb.js')
 const { MessageEmbed } = require('discord.js')
+const getuid = require('../functions/getuid.js')
 
 
 exports.run = async (client, message, args) => {
     var permission = permcheck(client, message, message.member, 'case')
     if (!permission) return;
 
-    let things = await sql.query(`SELECT caseid, reason, victim, moderator, date, type, link FROM \`${message.guild.id}\` WHERE victim=${args[0]}`)
-    let total = await sql.query(`SELECT MAX(caseid) FROM \`${message.guild.id}\` WHERE victim=${args[0]}`)
-    let myguy = await client.users.fetch(args[0])
-
+    let uid = getuid(message, args)
+    let things = await sql.query(`SELECT caseid, reason, victim, moderator, date, type, link FROM \`${message.guild.id}\` WHERE victim=${uid}`)
+    let total = await sql.query(`SELECT MAX(caseid) FROM \`${message.guild.id}\` WHERE victim=${uid}`)
+    let myguy = await client.users.fetch(uid)
+    
     let total2 = 0
     let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     things = things.splice(0)
@@ -18,6 +20,7 @@ exports.run = async (client, message, args) => {
         
         haveit = false
         let fields = 0
+        let binary = 1
         for (z in things) {
             console.log(total2, haveit)
             total2 ++
@@ -29,6 +32,7 @@ exports.run = async (client, message, args) => {
             time = `${months[time.getUTCMonth()]} ${time.getUTCDate()}, ${time.getUTCFullYear()}`    
             lengt = embed.length + caseid.toString().length + reason.length + time.toString().length + type.length + url.length + 12
             console.log(lengt)
+            binary = 0
             if (lengt < 6000 && fields < 25) {
                 embed.addField('​', `
                 \`${type}\` \`[${time}]\` [#${caseid}](${url}) ${reason} 
@@ -47,5 +51,7 @@ exports.run = async (client, message, args) => {
                 haveit = true
                 continue
             }
-        }
+        } 
+        
+        if (binary) message.channel.send("This user has no cases.") 
 }
