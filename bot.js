@@ -3,7 +3,6 @@ const Discord = require("discord.js");
 const client = new Discord.Client({ ws: { intents: Discord.Intents.ALL }});
 const config = require("./config.json");
 const fs = require("fs")
-const Enmap = require("enmap")
 
 client.config = config;
 
@@ -16,7 +15,7 @@ fs.readdir("./events/", (err, files) => {
     });
 });
 
-client.commands = new Enmap();
+client.commands = new Map();
 
 fs.readdir("./commands/", (err, files) => {
     if (err) return console.error(err);
