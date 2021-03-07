@@ -12,7 +12,6 @@
     "homepage": "discord.gg/yzqma4y",
     "dependencies": {
         "discord.js": "latest",
-        "enmap": "latest",
         "fs": "latest",
         "genius-lyrics-api": "^3.0.3",
         "js-yaml": "^3.14.0",
