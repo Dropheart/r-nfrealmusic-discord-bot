@@ -1,22 +1,28 @@
 {
-    "name": "r_nfrealmusic_discord_bot",
-    "description": "a bot for the r/nfrealmusic discord",
-    "version": "0.1.0",
-    "maintainers": [
-        {
-            "name": "Ahmed",
-            "email": "ahmed@techfromtheheart.com",
-            "web": "https://techfromtheheart.com"
-        }
-    ],
-    "homepage": "discord.gg/yzqma4y",
-    "dependencies": {
-        "discord.js": "latest",
-        "fs": "latest",
-        "genius-lyrics-api": "^3.0.3",
-        "js-yaml": "^3.14.0",
-        "mariadb": "^2.5.2",
-        "urllib": "latest",
-        "yaml": "^1.10.0"
+  "name": "r_nfrealmusic_discord_bot",
+  "description": "a bot for the r/nfrealmusic discord",
+  "version": "0.1.0",
+  "maintainers": [
+    {
+      "name": "Ahmed",
+      "email": "ahmed@techfromtheheart.com",
+      "web": "https://techfromtheheart.com"
     }
+  ],
+  "homepage": "discord.gg/yzqma4y",
+  "dependencies": {
+    "discord.js": "latest",
+    "fs": "latest",
+    "genius-lyrics-api": "^3.0.3",
+    "js-yaml": "^3.14.0",
+    "mariadb": "^2.5.2",
+    "urllib": "latest",
+    "yaml": "^1.10.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  },
+  "scripts": {
+    "format": "prettier --write ."
+  }
 }
