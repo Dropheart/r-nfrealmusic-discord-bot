@@ -1,12 +1,12 @@
 {
-    "token": "bot-token",
-    "prefix": "prefix",
-    "ownerid": "your-id",
-    "catapikey": "self-explanatory",
-    "genius": "genius-api-key",
-    "dbHost": "127.0.0.1",
-    "dbUser": "username",
-    "dbPassword": "pass",
-    "dbDatabase": "dbname",
-    "dbPort": "port"
+  "token": "bot-token",
+  "prefix": "prefix",
+  "ownerid": "your-id",
+  "catapikey": "self-explanatory",
+  "genius": "genius-api-key",
+  "dbHost": "127.0.0.1",
+  "dbUser": "username",
+  "dbPassword": "pass",
+  "dbDatabase": "dbname",
+  "dbPort": "port"
 }

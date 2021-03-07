@@ -1,23 +1,20 @@
 ---
 logchannels:
-  messagelogs: 
-    - 'channelid'
+  messagelogs:
+    - "channelid"
   modlogs:
-    - 'channelid'
+    - "channelid"
 
 rolePermissions:
-  'roleid': XXX #number 
+  "roleid": XXX #number
 
 commandPermissions:
-  'mute': XXX #number
-  'ban': XXX
-  'kick': XXX
-  'note': XXX
-  'case': XXX
-  'info': XXX
-  'update': XXX
+  "mute": XXX #number
+  "ban": XXX
+  "kick": XXX
+  "note": XXX
+  "case": XXX
+  "info": XXX
+  "update": XXX
 
-
-muteRole:
-  'roleid'
-...
+muteRole: "roleid"
