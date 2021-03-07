@@ -84,6 +84,8 @@ exports.run = async (client, message, args) => {
             } catch (err) {
                 message.channel.send("🚫 I do not have permission to assign the mute role.")
             }
+        } else {
+            throw("move")
         }
 
         
