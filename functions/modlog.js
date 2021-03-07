@@ -39,6 +39,7 @@ module.exports = async (client, message, type, victim, reason) => {
             color = '00EAFF'
         }
 
+        myguy = await client.users.fetch(victim)
         let embed
         let caseid
         try {
@@ -79,7 +80,6 @@ module.exports = async (client, message, type, victim, reason) => {
         }
 
 
-        myguy = await client.users.fetch(victim)
         embed = new MessageEmbed()
         .setTitle(`${type} - Case #${caseid}`)
         .setColor(color)
