@@ -59,7 +59,7 @@ exports.run = async (client, message, args) => {
       if (time.endsWith("h")) {
         var epoch =
           parseInt(Math.floor(new Date() / 1000)) +
-          parseInt(time.slice(0, -1)) * 360;
+          parseInt(time.slice(0, -1)) * 3600;
         time = time.slice(0, -1) + " hour(s)";
       } else if (time.endsWith("s")) {
         var epoch =
@@ -73,12 +73,12 @@ exports.run = async (client, message, args) => {
       } else if (time.endsWith("d")) {
         var epoch =
           parseInt(Math.floor(new Date() / 1000)) +
-          parseInt(time.slice(0, -1)) * 8640;
+          parseInt(time.slice(0, -1)) * 86400;
         time = time.slice(0, -1) + " day(s)";
       } else if (time.endsWith("y")) {
         var epoch =
           parseInt(Math.floor(new Date() / 1000)) +
-          parseInt(time.slice(0, -1)) * 3153600;
+          parseInt(time.slice(0, -1)) * 31536000;
         time = time.slice(0, -1) + " year(s)";
       }
 
