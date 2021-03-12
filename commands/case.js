@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
   if (!permission) return;
 
   let things = await sql.query(
-    `SELECT caseid, reason, victim, moderator, date, type, link FROM \`${message.guild.id}\` WHERE caseid=${args[0]}`
+    `SELECT caseid, reason, victim, moderator, date, type, link FROM \`${message.guild.id}\` WHERE caseid=?`, [args[0]]
   );
 
   regex = things[0].link.match(/([0-9]+)/g);
