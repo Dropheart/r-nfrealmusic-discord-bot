@@ -104,8 +104,8 @@ module.exports = async (client, message, type, victim, reason) => {
 
     try {
       await sql.query(
-        `INSERT INTO \`${message.guild.id}\` (caseid, reason, victim, moderator, date, type, link) VALUES (${caseid}, '${reason}', ${victim}, ${mod}, ${epoch}, '${type}', '${msglink}');`
-      );
+        `INSERT INTO \`${message.guild.id}\` (caseid, reason, victim, moderator, date, type, link) VALUES (?, ?, ?, ?, ?, ?, ?)`, [caseid, reason, victim, mod, epoch, type, msglink]
+        );
     } catch (err) {
       console.log(err);
     }
