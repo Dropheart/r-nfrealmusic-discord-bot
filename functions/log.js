@@ -11,15 +11,11 @@ module.exports = (client, logmessage, logged) => {
     if (!serverconf.logchannels.messagelogs[0]) return;
     var logchannel = serverconf.logchannels.messagelogs[0];
     var d = new Date();
-    client.channels
-      .fetch(logchannel)
-      .then(
-        client.channels.cache
-          .get(logchannel)
-          .send(logmessage.replace("{d}", d), {
-            allowedMentions: { users: [] },
-          })
-      );
+    client.channels.fetch(logchannel).then(
+      client.channels.cache.get(logchannel).send(logmessage.replace("{d}", d), {
+        allowedMentions: { users: [] },
+      })
+    );
   } catch (err) {
     console.log(err);
   }
