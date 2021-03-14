@@ -8,7 +8,8 @@ exports.run = async (client, message, args) => {
 
   caseid = args[0];
   let things = await sql.query(
-    `SELECT caseid, reason, updates, victim, moderator, date, type, link FROM \`${message.guild.id}\` WHERE caseid=?`, [caseid]
+    `SELECT caseid, reason, updates, victim, moderator, date, type, link FROM \`${message.guild.id}\` WHERE caseid=?`,
+    [caseid]
   );
   if (!things[0]) {
     message.channel.send("❓ No case exists with this number.");
