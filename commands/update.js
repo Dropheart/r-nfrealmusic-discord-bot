@@ -60,7 +60,8 @@ exports.run = async (client, message, args) => {
 
   try {
     await sql.query(
-      `UPDATE \`${message.guild.id}\` SET updates = ? WHERE caseid=?`, [pleasework, caseid]
+      `UPDATE \`${message.guild.id}\` SET updates = ? WHERE caseid=?`,
+      [pleasework, caseid]
     );
   } catch (err) {
     mesag.edit(ogembed);
